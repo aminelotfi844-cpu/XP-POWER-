@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>XP POWER — Mokhtar Zazay</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <a class="logo" href="#home">
+    XP <span>POWER</span>
+  </a>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#fivem">FiveM</a>
+    <a href="#wallpapers">Wallpapers</a>
+    <a href="#packs">Packs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button class="cart-btn" onclick="openCart()">
+    🛒 Cart <b id="cartCount">0</b>
+  </button>
+
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section id="home" class="hero">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <p class="eyebrow">WELCOME TO</p>
+
+    <h1>
+      XP <span>POWER</span>
+    </h1>
+
+    <h2>MOKHTAR ZAZAY</h2>
+
+    <p>
+      Premium FiveM resources, scripts, MLOs,
+      wallpapers and gaming packs.
+    </p>
+
+    <a class="hero-btn" href="#shop">
+      EXPLORE SHOP
+    </a>
+
+  </div>
+
+</section>
+
+<!-- SHOP -->
+
+<section id="shop" class="section">
+
+  <div class="section-title">
+    <p>XP POWER STORE</p>
+    <h2>Products</h2>
+  </div>
+
+  <div id="productsGrid" class="product-grid"></div>
+
+</section>
+
+<!-- FIVEM -->
+
+<section id="fivem" class="section compact-section">
+
+  <div class="section-title">
+    <p>FIVEM</p>
+    <h2>FiveM Resources</h2>
+  </div>
+
+  <div class="category-box">
+    🎮 Scripts • MLO • Citizen • Police • Vehicles
+  </div>
+
+</section>
+
+<!-- WALLPAPERS -->
+
+<section id="wallpapers" class="section compact-section">
+
+  <div class="section-title">
+    <p>4K WALLPAPERS</p>
+    <h2>Wallpapers</h2>
+  </div>
+
+  <div class="category-box">
+    🖥️ Gaming • 4K • Neon • Setup
+  </div>
+
+</section>
+
+<!-- PACKS -->
+
+<section id="packs" class="section compact-section">
+
+  <div class="section-title">
+    <p>PACKS</p>
+    <h2>Gaming Packs</h2>
+  </div>
+
+  <div class="category-box">
+    📦 Ultimate packs • Developer packs • Gaming bundles
+  </div>
+
+</section>
+
+<!-- CONTACT & DISCORD SUPPORT -->
+
+<section id="contact" class="section contact">
+
+  <div class="section-title">
+    <p>CONTACT & SUPPORT</p>
+    <h2>Need Help?</h2>
+  </div>
+
+  <p>
+    For orders, support and questions, contact XP POWER on Discord.
+  </p>
+
+  <div class="discord-card">
+
+    <div class="discord-icon">
+      💬
+    </div>
+
+    <div class="discord-content">
+
+      <span class="discord-label">
+        DISCORD SUPPORT
+      </span>
+
+      <h3>
+        mohammed_vi
+      </h3>
+
+      <p>
+        Orders • Support • Questions
+      </p>
+
+      <div class="discord-actions">
+
+        <button
+          class="discord-copy-btn"
+          onclick="navigator.clipboard.writeText('mohammed_vi'); alert('Discord username copied!')">
+          📋 Copy Username
+        </button>
+
+        <a
+          class="discord-server-btn"
+          href="https://discord.gg/TkyTnNv26U"
+          target="_blank"
+          rel="noopener noreferrer">
+          💬 Join Discord Server
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- ADMIN BAR -->
+
+<div id="adminBar" class="admin-bar">
+
+  <div>
+    <strong>🔐 ADMIN MODE</strong>
+    <small>Private control panel</small>
+  </div>
+
+  <div class="admin-actions">
+
+    <button onclick="openAddProduct()">
+      ＋ Add Product
+    </button>
+
+    <button onclick="openOrders()">
+      📦 Orders
+    </button>
+
+    <button class="danger-soft" onclick="adminLogout()">
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ADMIN LOGIN BUTTON -->
+
+<button
+  id="adminLoginBtn"
+  class="admin-login-btn"
+  onclick="openAdminLogin()">
+  🔒
+</button>
+
+<!-- ADMIN LOGIN MODAL -->
+
+<div id="adminLoginModal" class="modal">
+
+  <div class="modal-box small-box">
+
+    <button
+      class="close"
+      onclick="closeModal('adminLoginModal')">
+      ×
+    </button>
+
+    <h2>🔐 Admin Login</h2>
+
+    <p>
+      Private XP POWER area.
+    </p>
+
+    <input
+      id="adminPassword"
+      type="password"
+      placeholder="Admin password">
+
+    <button
+      class="main-btn full"
+      onclick="adminLogin()">
+      Unlock Admin
+    </button>
+
+    <p id="loginError" class="error"></p>
+
+  </div>
+
+</div>
+
+<!-- ADD PRODUCT MODAL -->
+
+<div id="addProductModal" class="modal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('addProductModal')">
+      ×
+    </button>
+
+    <h2>＋ Add Product</h2>
+
+    <p>
+      Create a product directly from your private panel.
+    </p>
+
+    <label>Product name</label>
+
+    <input
+      id="productName"
+      placeholder="Citizen Pack V2">
+
+    <label>Category</label>
+
+    <select id="productCategory">
+      <option>FiveM</option>
+      <option>Script</option>
+      <option>MLO</option>
+      <option>Pack</option>
+      <option>Wallpaper</option>
+      <option>Other</option>
+    </select>
+
+    <label>Price</label>
+
+    <input
+      id="productPrice"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="5.00">
+
+    <label>Description</label>
+
+    <textarea
+      id="productDescription"
+      placeholder="Describe your product..."></textarea>
+
+    <label>Product image</label>
+
+    <input
+      id="productImage"
+      type="file"
+      accept="image/*">
+
+    <div id="imagePreview" class="image-preview">
+      📷 Image preview
+    </div>
+
+    <button
+      class="main-btn full"
+      onclick="saveProduct()">
+      🚀 Publish Product
+    </button>
+
+  </div>
+
+</div>
+
+<!-- PRODUCT DETAILS MODAL -->
+
+<div id="productModal" class="modal">
+
+  <div class="modal-box product-modal">
+
+    <button
+      class="close"
+      onclick="closeModal('productModal')">
+      ×
+    </button>
+
+    <img
+      id="modalProductImage"
+      class="modal-product-image"
+      alt="">
+
+    <span
+      id="modalProductCategory"
+      class="tag"></span>
+
+    <h2 id="modalProductName"></h2>
+
+    <p id="modalProductDescription"></p>
+
+    <div class="modal-price">
+      $<span id="modalProductPrice"></span>
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="main-btn"
+        onclick="openBuyerForm()">
+        🛒 BUY NOW
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="addSelectedToCart()">
+        ＋ Add to cart
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BUYER FORM -->
+
+<div id="buyerModal" class="modal">
+
+  <div class="modal-box small-box">
+
+    <button
+      class="close"
+      onclick="closeModal('buyerModal')">
+      ×
+    </button>
+
+    <h2>🛒 Your Information</h2>
+
+    <p>
+      Enter your details so we can process your order.
+    </p>
+
+    <input
+      id="buyerName"
+      placeholder="Full name">
+
+    <input
+      id="buyerEmail"
+      type="email"
+      placeholder="Gmail / Email">
+
+    <input
+      id="buyerPhone"
+      type="tel"
+      placeholder="Phone number">
+
+    <input
+      id="buyerDiscord"
+      placeholder="Discord username">
+
+    <textarea
+      id="buyerNote"
+      placeholder="Note (optional)"></textarea>
+
+    <button
+      class="main-btn full"
+      onclick="submitOrder()">
+      Continue to Payment
+    </button>
+
+  </div>
+
+</div>
+
+<!-- PAYMENT -->
+
+<div id="checkoutModal" class="modal">
+
+  <div class="modal-box small-box">
+
+    <button
+      class="close"
+      onclick="closeModal('checkoutModal')">
+      ×
+    </button>
+
+    <h2>💳 Payment</h2>
+
+    <p>
+      Transfer the amount, then enter the reference below.
+    </p>
+
+    <div class="rib-box">
+
+      <b>Account name</b>
+
+      <p id="accountName">
+        YOUR_ACCOUNT_NAME_HERE
+      </p>
+
+      <b>RIB</b>
+
+      <p id="ribNumber">
+        YOUR_RIB_HERE
+      </p>
+
+    </div>
+
+    <div
+      id="checkoutSummary"
+      class="checkout-summary">
+    </div>
+
+    <input
+      id="transferReference"
+      placeholder="Transfer reference">
+
+    <label>
+      Payment proof
+    </label>
+
+    <input
+      id="proofFile"
+      type="file"
+      accept="image/*">
+
+    <button
+      class="main-btn full"
+      onclick="completeOrder()">
+      ✅ Confirm Order
+    </button>
+
+  </div>
+
+</div>
+
+<!-- SUCCESS -->
+
+<div id="successModal" class="modal">
+
+  <div class="modal-box small-box success-box">
+
+    <h2>✅ Order Received</h2>
+
+    <p>
+      Your order has been saved.
+    </p>
+
+    <div class="order-id">
+      Order ID:
+      <b id="orderId"></b>
+    </div>
+
+    <p class="muted">
+      Keep this Order ID for support.
+    </p>
+
+    <button
+      class="main-btn"
+      onclick="closeModal('successModal')">
+      Done
+    </button>
+
+  </div>
+
+</div>
+
+<!-- CART -->
+
+<div id="cartModal" class="modal">
+
+  <div class="modal-box small-box">
+
+    <button
+      class="close"
+      onclick="closeModal('cartModal')">
+      ×
+    </button>
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      Total:
+      $<span id="cartTotal">0.00</span>
+    </div>
+
+    <button
+      class="main-btn full"
+      onclick="checkoutCart()">
+      Checkout
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ADMIN ORDERS -->
+
+<div id="ordersModal" class="modal">
+
+  <div class="modal-box wide-box">
+
+    <button
+      class="close"
+      onclick="closeModal('ordersModal')">
+      ×
+    </button>
+
+    <div class="orders-head">
+
+      <div>
+
+        <h2>📦 Orders</h2>
+
+        <p>
+          Private order management.
+        </p>
+
+      </div>
+
+      <button
+        class="secondary-btn"
+        onclick="clearOrders()">
+        Clear all
+      </button>
+
+    </div>
+
+    <div id="ordersList"></div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-logo">
+    XP POWER
+  </div>
+
+  <p>
+    © 2026 XP POWER — Mokhtar Zazay
+  </p>
+
+</footer>
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
